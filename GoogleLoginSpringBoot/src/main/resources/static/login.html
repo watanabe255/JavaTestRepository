@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Googleログイン</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta name="google-signin-client_id" content="685124458001-ngrnm07uhkkd3n2ess5jamerea985ec2.apps.googleusercontent.com">
+</head>
+<body>
+    <h1>Googleログイン</h1>
+    <div id="g_id_onload"
+         data-client_id="685124458001-ngrnm07uhkkd3n2ess5jamerea985ec2.apps.googleusercontent.com"
+         data-callback="onSignIn">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <script>
+        function onSignIn(response) {
+            var id_token = response.credential;
+
+            fetch("/auth/google-login", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "id_token=" + id_token
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("ログイン成功: " + data);
+                window.location.href = "/home";
+            })
+            .catch(error => console.error("エラー:", error));
+        }
+    </script>
+</body>
+</html>
