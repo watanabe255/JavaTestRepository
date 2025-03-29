@@ -16,7 +16,7 @@ import java.util.Collections;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private static final String CLIENT_ID = "685124458001-ngrnm07uhkkd3n2ess5jamerea985ec2.apps.googleusercontent.com";
+    private static final String CLIENT_ID = "クライアントID";
 
     @PostMapping("/google-login")
     public String googleLogin(@RequestParam String id_token, HttpSession session) {
